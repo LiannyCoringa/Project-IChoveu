@@ -117,5 +117,9 @@ export function handleSearch(event) {
   const searchInput = document.getElementById('search-input');
   const searchValue = searchInput.value;
   searchCities(searchValue)
-    .then((res) => res.forEach((obj) => getWeatherByCity(obj.url)));
+    .then((res) => {
+      if (typeof res === 'object') {
+        res.forEach((obj) => getWeatherByCity(obj.url));
+      }
+    });
 }
