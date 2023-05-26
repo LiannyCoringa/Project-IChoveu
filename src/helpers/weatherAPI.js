@@ -1,4 +1,3 @@
-// Remova os comentários a medida que for implementando as funções
 const TOKEN = import.meta.env.VITE_TOKEN;
 
 export const searchCities = async (term) => {
@@ -16,9 +15,12 @@ export const getWeatherByCity = async (cityURL) => {
   const response = await fetch(API_CITY);
   const data = await response.json();
   const tempo = {
+    name: data.location.name,
+    country: data.location.country,
     temp: data.current.temp_c,
     condition: data.current.condition.text,
     icon: data.current.condition.icon,
   };
+  // await createCityElement(tempo);
   return tempo;
 };

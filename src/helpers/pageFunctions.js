@@ -78,6 +78,7 @@ export function showForecast(forecastList) {
  */
 export function createCityElement(cityInfo) {
   const { name, country, temp, condition, icon /* , url */ } = cityInfo;
+  const cities = document.querySelector('#cities');
 
   const cityElement = createElement('li', 'city');
 
@@ -103,7 +104,7 @@ export function createCityElement(cityInfo) {
 
   cityElement.appendChild(headingElement);
   cityElement.appendChild(infoContainer);
-
+  cities.appendChild(cityElement);
   return cityElement;
 }
 
@@ -119,7 +120,10 @@ export function handleSearch(event) {
   searchCities(searchValue)
     .then((res) => {
       if (typeof res === 'object') {
-        res.forEach((obj) => getWeatherByCity(obj.url));
+        res.forEach(async (obj) => {
+          getWeatherByCity(obj.url);
+          createCityElement(await getWeatherByCity(obj.url));
+        });
       }
     });
 }
