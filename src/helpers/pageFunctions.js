@@ -98,13 +98,16 @@ export function createCityElement(cityInfo) {
   const iconElement = createElement('img', 'condition-icon');
   iconElement.src = icon.replace('64x64', '128x128');
 
+  const buttonElement = createElement('button', 'city-forecast-button', 'Ver previsão');
   const infoContainer = createElement('div', 'city-info-container');
   infoContainer.appendChild(tempContainer);
   infoContainer.appendChild(iconElement);
+  infoContainer.appendChild(buttonElement);
 
   cityElement.appendChild(headingElement);
   cityElement.appendChild(infoContainer);
   cities.appendChild(cityElement);
+
   return cityElement;
 }
 
