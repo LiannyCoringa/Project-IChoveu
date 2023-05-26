@@ -20,7 +20,15 @@ export const getWeatherByCity = async (cityURL) => {
     temp: data.current.temp_c,
     condition: data.current.condition.text,
     icon: data.current.condition.icon,
+    url: cityURL,
   };
-  // await createCityElement(tempo);
   return tempo;
 };
+
+export const forecast = async (cityURL) => {
+  const API_DAYS = `http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${TOKEN}&q=${cityURL}&days=7`;
+  const response = await fetch(API_DAYS);
+  const data = await response.json();
+  const arrayForecast = data.forecast.forecastday;
+  return arrayForecast;
+}
