@@ -25,10 +25,13 @@ export const getWeatherByCity = async (cityURL) => {
   return tempo;
 };
 
-export const forecast = async (cityURL) => {
+export const forecast = async (nome) => {
+  const dataName = await searchCities(nome);
+  const cityURL = dataName.url;
   const API_DAYS = `http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${TOKEN}&q=${cityURL}&days=7`;
   const response = await fetch(API_DAYS);
   const data = await response.json();
+  console.log(data);
   const arrayForecast = data.forecast.forecastday;
   return arrayForecast;
-}
+};
